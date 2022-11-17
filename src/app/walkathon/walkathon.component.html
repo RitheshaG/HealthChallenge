@@ -1,0 +1,55 @@
+<h1 class="page">HEALTH CHALLENGE (DA)</h1>
+<div class="column" style="width: 300px;">
+    <div class="row" style="width: 300px;">
+        <h2 style="text-align: center;height: 20px;color:#D0D0CE">TEAM STANDINGS</h2>
+        <table>
+            <tr>
+              <th style="width: 150px;color: #86BC25;">Team Name </th>
+              <th style="color:#86BC25 ;">KMs</th>
+              <th style="color:#86BC25;">Points</th>
+            </tr>
+            <tr *ngFor="let team of teamLevel" style="margin-bottom: 5px;height: 9px;">
+              <td >{{team.TeamName}}</td>
+              <td >{{team.totalKM}}</td>
+              <td >{{team.rank}}</td>
+            </tr>
+          </table>
+    </div>
+</div>
+<div class="column" style="width: 72%;">
+    <div class="row">
+        <h2 class="heading">TOP 5 PLAYERS FOR THE DAY</h2>
+        <div class="row" style="display: flex;">
+            <div *ngFor="let count of top5IndividualPlayers;let i=index;">
+                <div class="col-md-2">
+                    <div class="card" style="width:9rem;margin: 8px;line-height: 10px;height:200px">
+                        <div class="card-body">
+                            <h4 class="card-title" style="height: 45px;"> {{count.name | uppercase}}<br>({{count.TeamName}})</h4>
+                            <p class="card-text"> {{count.currentDayCount}} KMs</p>
+                            <p class="card-text"> Challenge Met : {{count.result}}/21</p>
+                            <mat-progress-bar value={{count.result*4.762}}></mat-progress-bar>  
+                            <img class="card-img-top" src="{{count.avatar}}" onerror="this.src='assets/Profile.png';"
+                                heigth=60% width="60%" alt="" style="padding-top: 5px;">
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br>
+    <h2 class="heading" style="margin-top: -9px;">OVERALL TOP 5 PLAYERS</h2>
+    <div class="row" style="display: flex;">
+        <div *ngFor="let count of top5OverallPlayers;let i=index;">
+            <div class="col-md-2">
+                <div class="card" style="width:9rem;margin: 8px;line-height: 10px;height: 200px;">
+                    <div class="card-body">
+                        <h4 class="card-title" style="height: 45px;"> {{count.name | uppercase}}</h4>
+                        <p class="card-text"> {{count.asOfDateCount}} KMs</p>
+                        <p class="card-text"> Challenge Met : {{count.result}}/21</p>
+                        <mat-progress-bar value={{count.result*4.762}}></mat-progress-bar>
+                        <img class="card-img-top" src="{{count.avatar}}" onerror="this.src='assets/Profile.png';"
+                            heigth=60% width="60%" alt="" style="padding-top: 5px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

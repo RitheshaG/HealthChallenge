@@ -1,0 +1,133 @@
+{
+    "result": 4,
+    "totalDays": 21,
+    "currentDay": 9,
+    "days": [
+        {
+            "dayNumber": 1,
+            "date": "2022-11-07 00:00:00",
+            "value": 23.5,
+            "progress": 100
+        },
+        {
+            "dayNumber": 2,
+            "date": "2022-11-08 00:00:00",
+            "value": 5.6,
+            "progress": 70
+        },
+        {
+            "dayNumber": 3,
+            "date": "2022-11-09 00:00:00",
+            "value": 8,
+            "progress": 100
+        },
+        {
+            "dayNumber": 4,
+            "date": "2022-11-10 00:00:00",
+            "value": 12.3,
+            "progress": 100
+        },
+        {
+            "dayNumber": 5,
+            "date": "2022-11-11 00:00:00",
+            "value": 13.4,
+            "progress": 100
+        },
+        {
+            "dayNumber": 6,
+            "date": "2022-11-12 00:00:00",
+            "value": 2.8,
+            "progress": 35
+        },
+        {
+            "dayNumber": 7,
+            "date": "2022-11-13 00:00:00",
+            "value": 14.9,
+            "progress": 100
+        },
+        {
+            "dayNumber": 8,
+            "date": "2022-11-14",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 9,
+            "date": "2022-11-15",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 10,
+            "date": "2022-11-16",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 11,
+            "date": "2022-11-17",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 12,
+            "date": "2022-11-18",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 13,
+            "date": "2022-11-19",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 14,
+            "date": "2022-11-20",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 15,
+            "date": "2022-11-21",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 16,
+            "date": "2022-11-22",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 17,
+            "date": "2022-11-23",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 18,
+            "date": "2022-11-24",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 19,
+            "date": "2022-11-25",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 20,
+            "date": "2022-11-26",
+            "value": 0,
+            "progress": 0
+        },
+        {
+            "dayNumber": 21,
+            "date": "2022-11-27",
+            "value": 0,
+            "progress": 0
+        }
+    ]
+}
