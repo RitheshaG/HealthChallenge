@@ -1,0 +1,20 @@
+<div class="main">
+<p style="text-align: center; font-size: 25px;">Team Members Details </p>
+<div class="details">
+<table>
+    <tr>
+        <td style="width: 200px; font-weight: bold;">NAME</td>
+        <td style="font-weight: bold;">KMs</td>
+    </tr>
+    <tr *ngFor="let team of teamData">
+        <td style="width: 200px;">{{team.name | uppercase}}</td>
+        <td>{{team.asOfDateCount}}</td>
+    </tr>
+</table>
+
+</div>
+<div class="details"><button type="button" style="margin-top: 5px;" (click)="onClickOk()">OK</button></div>
+
+</div>
+
+

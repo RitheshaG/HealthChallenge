@@ -1,0 +1,8 @@
+::ng-deep .mat-dialog-container{
+    width: 400px;
+}
+
+.details{
+    display: flex;
+    justify-content: center;
+}

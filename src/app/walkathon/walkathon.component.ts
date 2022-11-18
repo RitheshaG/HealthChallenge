@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { WalkathonService } from '../walkathon.service';
 import { ChartType } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
+import {MatDialog,MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
 
 interface Challenge {
   id: Number;
@@ -25,7 +27,8 @@ export class WalkathonComponent {
   teamLevel: any;
   currentDate:any;
 
-  constructor(private walkathonService: WalkathonService) {
+  constructor(private walkathonService: WalkathonService,
+              private dialogRef:MatDialog) {
     walkathonService.getTopPlayer().subscribe(res => {
       this.players = res.filter((s: any) => s.name);
       this.top5IndividualPlayers = this.players
@@ -38,6 +41,16 @@ export class WalkathonComponent {
       this.currentDate=this.walkathonService.currentDateSer;
     });
   }
+
+  openDialog(team:any){
+    const Players = this.players.filter((player: any) => player.teamName.includes(team.TeamName));
+    this.dialogRef.open(PopupComponent,{
+      data:{
+        team:Players
+      }
+    });
+  }
+
   getTeamData = (data: any) => {
     this.teamLevel = this.walkathonService.getTeams();
     this.teamLevel.forEach((team: any) => {
@@ -45,6 +58,8 @@ export class WalkathonComponent {
       const Players = data.filter((player: any) => playerIds.includes(player.id));
       team['totalKM'] = +(Players?.reduce((a: any, b: any) => a += (+b.asOfDateCount), 0)?.toFixed(1) ?? 0);
       team['rank'] = Players?.length === 4 ? this.giveMeRank(Players) : 0;
+      team['teamName'] = Players.teamName;
+      
     });
     this.teamLevel.sort((a: any, b: any) => ((b.rank - a.rank || b.totalKM - a.totalKM)));
   }

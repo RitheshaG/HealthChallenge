@@ -9,14 +9,13 @@
                 <th style="color:#86BC25;">Points</th>
             </tr>
             <tr *ngFor="let team of teamLevel" style="margin-bottom: 5px;height: 9px;">
-                <td>{{team.TeamName}}</td>
-                <td>{{team.totalKM}}</td>
-                <td>{{team.rank}}</td>
+              <td (click)="openDialog(team)" style="cursor: pointer;">{{team.TeamName}}</td>
+              <td >{{team.totalKM}}</td>
+              <td >{{team.rank}}</td>
             </tr>
         </table>
     </div>
 </div>
-
 <div class="column" style="width: 72%;">
     <div class="row">
         <h2 class="heading">TOP 5 PLAYERS FOR THE DAY </h2>
