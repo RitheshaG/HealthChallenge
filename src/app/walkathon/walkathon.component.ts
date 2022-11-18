@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WalkathonService } from '../walkathon.service';
 import { ChartType } from 'chart.js';
 import { HttpClient } from '@angular/common/http';
-import {MatDialog,MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 
 interface Challenge {
@@ -25,10 +25,10 @@ export class WalkathonComponent {
   top5IndividualPlayers: any;
   top5OverallPlayers: any;
   teamLevel: any;
-  currentDate:any = "11/18/2022 2:59 PM";
+  currentDate: any = "11/18/2022 6:00 PM";
 
   constructor(private walkathonService: WalkathonService,
-              private dialogRef:MatDialog) {
+    private dialogRef: MatDialog) {
     walkathonService.getTopPlayer().subscribe(res => {
       this.players = res.filter((s: any) => s.name);
       this.top5IndividualPlayers = this.players
@@ -41,11 +41,17 @@ export class WalkathonComponent {
     });
   }
 
-  openDialog(team:any){
+  openDialog(team: any) {
     const Players = this.players.filter((player: any) => player.teamName.includes(team.TeamName));
-    this.dialogRef.open(PopupComponent,{
-      data:{
-        team:Players
+
+    if (Players?.length === 0) {
+      return;
+    }
+
+    this.dialogRef.open(PopupComponent, {
+      data: {
+        team: Players,
+        rank: team.rank
       }
     });
   }
@@ -58,7 +64,7 @@ export class WalkathonComponent {
       team['totalKM'] = +(Players?.reduce((a: any, b: any) => a += (+b.asOfDateCount), 0)?.toFixed(1) ?? 0);
       team['rank'] = Players?.length === 4 ? this.giveMeRank(Players) : 0;
       team['teamName'] = Players.teamName;
-      
+
     });
     this.teamLevel.sort((a: any, b: any) => ((b.rank - a.rank || b.totalKM - a.totalKM)));
   }
@@ -80,6 +86,6 @@ export class WalkathonComponent {
   checkPoints = (kmsList: any, start: number, end: number, kms: number): boolean => {
     return kmsList.totalKMSAsOfNow.filter((s: any) => s.dayNumber >= start && s.dayNumber <= end).reduce((a: any, b: any) => a += b.value, 0) >= kms;
   }
-    
-  }
+
+}
 

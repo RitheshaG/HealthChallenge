@@ -7,9 +7,9 @@ import { map, mergeMap, of, flatMap, toArray } from 'rxjs';
 })
 export class WalkathonService {
 
-  private url:string="assets/json/walkathon.json";
+  private url: string = "assets/json/walkathon.json";
   teamName: any;
- 
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -23,20 +23,29 @@ export class WalkathonService {
       mergeMap((player: any) => {
         // return this.httpClient.get(``)
         return this.httpClient.get(`assets/json/${player.id}.json`)
-          .pipe(map((individual: any) => { 
-            if (player.name.toUpperCase().includes('WHITENIGHT')||player.name.toUpperCase().includes('WALTER REISFELD')||player.name.toUpperCase().includes('VALERY ORLOV')) {
+          .pipe(map((individual: any) => {
+            if (player.name.toUpperCase().includes('WHITENIGHT') || player.name.toUpperCase().includes('WALTER REISFELD') || player.name.toUpperCase().includes('VALERY ORLOV')) {
               return {};
             }
             player['currentDayCount'] = +(individual?.days?.find((s: any) => s.dayNumber === individual.currentDay)?.value?.toFixed(1) ?? 0);
             player['totalKMSAsOfNow'] = individual?.days?.filter((s: any) => s.dayNumber <= individual.currentDay);
-            player['asOfDateCount'] = +(player['totalKMSAsOfNow']?.reduce((a: any, b: any) => a += (b?.value ?? 0), 0)?.toFixed(1) ?? 0);    
+            player['asOfDateCount'] = +(player['totalKMSAsOfNow']?.reduce((a: any, b: any) => a += (b?.value ?? 0), 0)?.toFixed(1) ?? 0);
             player['teamName'] = this.getTeamName(player.id);
+            this.weekLevelCount(player);
             return player;
           }))
       }), toArray());
   }
 
-  getTeamName = (data: any):string => {
+  weekLevelCount(player: any) {
+    for (const week of [1, 2, 3, 4]) {
+      const start = ((week - 1) * 7) + 1;
+      const end = start + 6;
+      player[`w${week}`] = +(player.totalKMSAsOfNow.filter((s: any) => s.dayNumber >= start && s.dayNumber <= end).reduce((a: any, b: any) => a += b.value, 0)).toFixed(1);
+    }
+  }
+
+  getTeamName = (data: any): string => {
     return this.getTeams().find((team: any) => {
       const playerIds = [team.Player1id, team.Player2id, team.Player3id, team.Player4id];
       return playerIds.includes(data);
@@ -111,17 +120,6 @@ export class WalkathonService {
         "Player3id": 155968,
         "Player4": "P Enoch Israel",
         "Player4id": 155959
-      },
-      {
-        "TeamName": "RRR (Roaring Road Runners )",
-        "Player1": "BALAKRISHNAN B R",
-        "Player1id": 155509,
-        "Player2": "Harikrishna Kotaru",
-        "Player2id": 155867,
-        "Player3": "Parikshit B",
-        "Player3id": 155861,
-        "Player4": "Suman Kumar Behera",
-        "Player4id": 0
       },
       {
         "TeamName": "Pushpa-TheFire",

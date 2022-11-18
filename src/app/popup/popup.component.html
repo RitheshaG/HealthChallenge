@@ -1,16 +1,30 @@
 <div class="main">
-    <p style="text-align: center; font-size: 25px;color:#D0D0CE">Team Members Details </p>
+    <p style="text-align: center; font-size: 25px;color:#D0D0CE">{{teamName}} :- Team Members Details </p>
     <div class="details">
         <table>
             <tr>
                 <th style="color: #86BC25;width: 200px; font-weight: bold;">NAME</th>
-                <th style="color: #86BC25;" *ngFor="let days of totalDays; let i = index">Day {{i + 1}}</th>
+                <ng-container *ngFor="let days of totalDays; let i = index; let lst = last">
+                    <th style="color: #86BC25;">Day {{i + 1}}</th>
+                    <th *ngIf="(i+1) % 7 === 0 || lst">Week Total</th>
+                </ng-container>
                 <th style="color: #86BC25;font-weight: bold;">Total KMs</th>
             </tr>
             <tr *ngFor="let team of teamData">
                 <td style="width: 200px;">{{team.name | uppercase}}</td>
-                <td *ngFor="let kms of team.totalKMSAsOfNow">{{kms.value}}</td>
+                <ng-container *ngFor="let kms of team.totalKMSAsOfNow;let i = index; let lst = last">
+                    <td>{{kms.value}}</td>
+                    <td *ngIf="(i+1) % 7 === 0 || lst">{{team['w'+ (Math.floor((i+1)/7)+((i+1) % 7 === 0 ? 0 : 1))]}}</td>
+                </ng-container>
                 <td>{{team.asOfDateCount}}</td>
+            </tr>
+            <tr>
+                <td style="width: 200px;">Total Points</td>
+                <ng-container *ngFor="let kms of totalDays;let i = index; let lst = last">
+                    <td>{{kms.value}}</td>
+                    <td style="background-color: #43B02A;" *ngIf="(i+1) % 7 === 0 || lst">{{totalPoints('w'+ (Math.floor((i+1)/7)+((i+1) % 7 === 0 ? 0 : 1)))}}</td>
+                </ng-container>
+                <td style="background-color: #43B02A;">{{rank}}</td>
             </tr>
         </table>
 
