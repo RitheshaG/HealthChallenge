@@ -30,6 +30,11 @@ export class PopupComponent implements OnInit {
     this.dialogRef.close();
   }
   totalPoints(week: any): number {
+
+    if (this.teamData.length != 4) {
+      return 0;
+    }
+
     const total = Math.min(...this.teamData.map((a: any) => a[week]));
 
     let rank = 0;
