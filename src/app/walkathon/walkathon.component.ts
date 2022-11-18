@@ -25,7 +25,7 @@ export class WalkathonComponent {
   top5IndividualPlayers: any;
   top5OverallPlayers: any;
   teamLevel: any;
-  currentDate:any;
+  currentDate:any = "11/18/2022 2:59 PM";
 
   constructor(private walkathonService: WalkathonService,
               private dialogRef:MatDialog) {
@@ -38,7 +38,6 @@ export class WalkathonComponent {
         .sort((a: any, b: any) => b.asOfDateCount - a.asOfDateCount)
         .slice(0, 5);
       this.getTeamData(this.players);
-      this.currentDate=this.walkathonService.currentDateSer;
     });
   }
 

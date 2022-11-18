@@ -9,7 +9,6 @@ export class WalkathonService {
 
   private url:string="assets/json/walkathon.json";
   teamName: any;
-  currentDateSer:any;
  
   constructor(private httpClient: HttpClient) {
   }
@@ -32,7 +31,6 @@ export class WalkathonService {
             player['totalKMSAsOfNow'] = individual?.days?.filter((s: any) => s.dayNumber <= individual.currentDay);
             player['asOfDateCount'] = +(player['totalKMSAsOfNow']?.reduce((a: any, b: any) => a += (b?.value ?? 0), 0)?.toFixed(1) ?? 0);    
             player['teamName'] = this.getTeamName(player.id);
-            this.currentDateSer = individual?.days?.find((s:any)=>individual.currentDay === s.dayNumber)?.date ??0;
             return player;
           }))
       }), toArray());

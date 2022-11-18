@@ -1,8 +1,28 @@
-::ng-deep .mat-dialog-container{
-    width: 400px;
+::ng-deep.mat-dialog-container{
+    background-color: black;
 }
-
+.main{
+    background-color: black;
+}
 .details{
     display: flex;
     justify-content: center;
 }
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 3px;
+    color: #D0D0CE;
+  }
+  
+  tr:nth-child(even) {
+    background-color:#53565A;
+    
+  }

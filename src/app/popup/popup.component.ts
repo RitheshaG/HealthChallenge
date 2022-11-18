@@ -8,16 +8,19 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class PopupComponent implements OnInit {
   teamData;
-  constructor( @Inject(MAT_DIALOG_DATA) public data:any,
+  totalDays: any = [];
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<PopupComponent>,
-             ) {
-              this.teamData = data.team
-              }
+  ) {
+    this.teamData = data.team
+    const maxday = Math.max(...data.team.map((s: any) => s.totalKMSAsOfNow.length));
+    this.totalDays = Array(maxday).fill(0);
+  }
 
   ngOnInit(): void {
   }
 
-  onClickOk():void{
+  onClickOk(): void {
     this.dialogRef.close();
   }
 
