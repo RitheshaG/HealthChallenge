@@ -23,21 +23,19 @@ export class WalkathonComponent {
   top5IndividualPlayers: any;
   top5OverallPlayers: any;
   teamLevel: any;
+  currentDate:any;
 
   constructor(private walkathonService: WalkathonService) {
     walkathonService.getTopPlayer().subscribe(res => {
       this.players = res.filter((s: any) => s.name);
-
       this.top5IndividualPlayers = this.players
         .sort((a: any, b: any) => b.currentDayCount - a.currentDayCount)
         .slice(0, 5);
-
       this.top5OverallPlayers = this.players
         .sort((a: any, b: any) => b.asOfDateCount - a.asOfDateCount)
         .slice(0, 5);
-
       this.getTeamData(this.players);
-
+      this.currentDate=this.walkathonService.currentDateSer;
     });
   }
   getTeamData = (data: any) => {
@@ -47,14 +45,12 @@ export class WalkathonComponent {
       const Players = data.filter((player: any) => playerIds.includes(player.id));
       team['totalKM'] = +(Players?.reduce((a: any, b: any) => a += (+b.asOfDateCount), 0)?.toFixed(1) ?? 0);
       team['rank'] = Players?.length === 4 ? this.giveMeRank(Players) : 0;
-      team['teamName'] = Players.teamName;
     });
-    this.teamLevel.sort((a: any, b: any) =>( (b.rank - a.rank || b.totalKM-a.totalKM )));
+    this.teamLevel.sort((a: any, b: any) => ((b.rank - a.rank || b.totalKM - a.totalKM)));
   }
 
   giveMeRank = (players: any[]): number => {
     let rank = 0;
-    console.log(players)
     for (const week of [1, 2, 3, 4]) {
       const start = ((week - 1) * 7) + 1;
       const end = start + 6;
@@ -70,6 +66,6 @@ export class WalkathonComponent {
   checkPoints = (kmsList: any, start: number, end: number, kms: number): boolean => {
     return kmsList.totalKMSAsOfNow.filter((s: any) => s.dayNumber >= start && s.dayNumber <= end).reduce((a: any, b: any) => a += b.value, 0) >= kms;
   }
-
-}
+    
+  }
 

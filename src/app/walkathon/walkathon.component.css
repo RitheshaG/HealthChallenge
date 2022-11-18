@@ -69,3 +69,13 @@
 ::ng-deep .mat-progress-bar-buffer {
   background-color: #000000;
 }
+
+.date{
+color:aliceblue;margin-left:70%;padding-top:-3px;margin-left: 75%;
+margin-top: -23px;
+margin-bottom: 1px;
+}
+
+.button{
+  background-color: transparent;
+}

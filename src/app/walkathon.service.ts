@@ -8,7 +8,9 @@ import { map, mergeMap, of, flatMap, toArray } from 'rxjs';
 export class WalkathonService {
 
   private url:string="assets/json/walkathon.json";
-  private url1:string="assets/json/Teams.json";
+  teamName: any;
+  currentDateSer:any;
+ 
   constructor(private httpClient: HttpClient) {
   }
 
@@ -22,17 +24,25 @@ export class WalkathonService {
       mergeMap((player: any) => {
         // return this.httpClient.get(``)
         return this.httpClient.get(`assets/json/${player.id}.json`)
-          .pipe(map((individual: any) => {
-
+          .pipe(map((individual: any) => { 
             if (player.name.toUpperCase().includes('WHITENIGHT')||player.name.toUpperCase().includes('WALTER REISFELD')||player.name.toUpperCase().includes('VALERY ORLOV')) {
               return {};
             }
             player['currentDayCount'] = +(individual?.days?.find((s: any) => s.dayNumber === individual.currentDay)?.value?.toFixed(1) ?? 0);
             player['totalKMSAsOfNow'] = individual?.days?.filter((s: any) => s.dayNumber <= individual.currentDay);
-            player['asOfDateCount'] = +(player['totalKMSAsOfNow']?.reduce((a: any, b: any) => a += (b?.value ?? 0), 0)?.toFixed(1) ?? 0);
+            player['asOfDateCount'] = +(player['totalKMSAsOfNow']?.reduce((a: any, b: any) => a += (b?.value ?? 0), 0)?.toFixed(1) ?? 0);    
+            player['teamName'] = this.getTeamName(player.id);
+            this.currentDateSer = individual?.days?.find((s:any)=>individual.currentDay === s.dayNumber)?.date ??0;
             return player;
           }))
       }), toArray());
+  }
+
+  getTeamName = (data: any):string => {
+    return this.getTeams().find((team: any) => {
+      const playerIds = [team.Player1id, team.Player2id, team.Player3id, team.Player4id];
+      return playerIds.includes(data);
+    })?.TeamName ?? '';
   }
 
   getTeams = () => {
@@ -78,7 +88,7 @@ export class WalkathonService {
         "Player2": "RITHESHA G",
         "Player2id": 155829,
         "Player3": "Milind Y K",
-        "Player3id": 155829,
+        "Player3id": 155893,
         "Player4": "AMRUTA BOKARE",
         "Player4id": 155904
       },
@@ -122,7 +132,7 @@ export class WalkathonService {
         "Player2": "sheel Chandra",
         "Player2id": 155841,
         "Player3": "Muniappan",
-        "Player3id": 0,
+        "Player3id": 155567,
         "Player4": "sharan S G",
         "Player4id": 155898
       },
