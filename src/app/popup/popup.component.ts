@@ -43,6 +43,11 @@ export class PopupComponent implements OnInit {
         rank += 1;
       }
     }
+    
+    if (rank > 0) {
+      rank += 1;
+    }
+
     return rank;
   }
 }

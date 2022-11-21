@@ -22,7 +22,7 @@ export class WalkathonService {
       flatMap((s: any) => s),
       mergeMap((player: any) => {
         // return this.httpClient.get(``)
-        return this.httpClient.get(`assets/json/${player.id}.json`)
+        return this.httpClient.get(`assets/json/${player.id}-1.json`)
           .pipe(map((individual: any) => {
             if (player.name.toUpperCase().includes('WHITENIGHT') || player.name.toUpperCase().includes('WALTER REISFELD') || player.name.toUpperCase().includes('VALERY ORLOV')) {
               return {};

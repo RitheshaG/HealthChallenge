@@ -25,7 +25,7 @@ export class WalkathonComponent {
   top5IndividualPlayers: any;
   top5OverallPlayers: any;
   teamLevel: any;
-  currentDate: any = "11/18/2022 6:00 PM";
+  currentDate: any = "11/21/2022 11:00 PM";
 
   constructor(private walkathonService: WalkathonService,
     private dialogRef: MatDialog) {
@@ -72,14 +72,21 @@ export class WalkathonComponent {
   giveMeRank = (players: any[]): number => {
     let rank = 0;
     for (const week of [1, 2, 3, 4]) {
+      let weekRank = 0;
       const start = ((week - 1) * 7) + 1;
       const end = start + 6;
       for (const km of [14, 21, 28, 35, 42, 49, 56]) {
+
         if (players.every(s => this.checkPoints(s, start, end, km))) {
-          rank += 1;
+          weekRank += 1;
         }
       }
+      if (weekRank > 0) {
+        weekRank += 1;
+      }
+      rank += weekRank;
     }
+    console.log(rank);
     return rank;
   }
 
