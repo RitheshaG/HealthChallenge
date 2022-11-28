@@ -25,7 +25,7 @@ export class WalkathonComponent {
   top5IndividualPlayers: any;
   top5OverallPlayers: any;
   teamLevel: any;
-  currentDate: any = "11/23/2022 12:00 PM";
+  currentDate: any = "11/24/2022 2:30 PM";
 
   constructor(private walkathonService: WalkathonService,
     private dialogRef: MatDialog) {
